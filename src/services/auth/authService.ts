@@ -1,5 +1,7 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+
+const provider = new GoogleAuthProvider();
 
 export const loginUser = async (email: string, password: string): Promise<void> => {
   try {
@@ -23,4 +25,16 @@ export const registerUser = async (email: string, password: string): Promise<voi
             throw new Error('Erro desconhecido ao registrar.');
         }
     }
-  };
+};
+
+export const loginWithGoogle = async (): Promise<void> => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(error.message || 'Erro ao fazer login com Google.');
+      } else {
+        throw new Error('Erro desconhecido ao fazer login com Google.');
+      }
+    }
+};

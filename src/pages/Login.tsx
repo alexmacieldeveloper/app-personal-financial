@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/auth/authService";
+import { loginUser, loginWithGoogle  } from "../services/auth/authService";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -24,6 +24,20 @@ const Login: React.FC = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      navigate('/dashboard');
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Erro desconhecido ao fazer login com Google.');
+      }
+      console.error('Erro de login com Google:', error);
+    }
+  };
+
   return (
     <div>
       <h2>Login</h2>
@@ -43,6 +57,9 @@ const Login: React.FC = () => {
           required
         />
         <button type="submit">Entrar</button>
+        <button type="button" onClick={handleGoogleLogin}>
+          Entrar com Google
+        </button>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
