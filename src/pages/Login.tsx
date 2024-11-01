@@ -15,8 +15,12 @@ const Login: React.FC = () => {
       await loginUser(email, password);
       navigate('/dashboard'); 
     } catch (error) {
-      setError(error.message);
-      console.error('Erro de login:', error);
+        if (error instanceof Error) {
+            setError(error.message);
+        } else {
+            setError('Erro desconhecido ao fazer login.');
+        }
+        console.error('Erro de login:', error);
     }
   };
 
