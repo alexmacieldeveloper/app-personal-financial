@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../services/auth/authService';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/auth/authService";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -13,14 +13,14 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       await loginUser(email, password);
-      navigate('/dashboard'); 
+      navigate("/dashboard");
     } catch (error) {
-        if (error instanceof Error) {
-            setError(error.message);
-        } else {
-            setError('Erro desconhecido ao fazer login.');
-        }
-        console.error('Erro de login:', error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Erro desconhecido ao fazer login.");
+      }
+      console.error("Erro de login:", error);
     }
   };
 
@@ -43,7 +43,7 @@ const Login: React.FC = () => {
           required
         />
         <button type="submit">Entrar</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
   );
