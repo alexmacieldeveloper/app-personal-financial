@@ -1,4 +1,6 @@
 import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './styles/theme';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
@@ -9,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
       <AuthProvider>
         <Router>
           <Routes>
@@ -21,6 +24,7 @@ function App() {
           </Routes>
         </Router>
       </AuthProvider>
+    </ThemeProvider>  
   );
 }
 
