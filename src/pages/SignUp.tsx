@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/auth/authService';
 import { TextField, Button, Typography, Container, Paper } from '@mui/material';
+import WaveBackground from '../components/WaveBackground';
+
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -31,7 +33,8 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" style={{ paddingTop: '24px'}}>
+      <WaveBackground />
       <Paper elevation={3} style={{ padding: '20px' }}>
         <Typography component="h1" variant="h5">Faça seu registro</Typography>
         <form onSubmit={handleRegister}>
