@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, loginWithGoogle } from '../services/auth/authService';
-import { TextField, Button, Typography, Container, Grid, Paper, IconButton } from '@mui/material';
+import { TextField, Button, Typography, Container, Paper, IconButton } from '@mui/material';
 import WaveBackground from '../components/WaveBackground';
 import GoogleIcon from '../components/GoogleIcon';
 
