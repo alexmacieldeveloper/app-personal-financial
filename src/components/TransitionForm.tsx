@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { TextField, Button, MenuItem, Select, FormControl, InputLabel, SelectChangeEvent, FormHelperText } from '@mui/material';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../services/firebaseConfig';
 
 type TransactionType = 'receita' | 'despesa';
 type Category = 'alimentacao' | 'transporte' | 'lazer' | 'outros';
@@ -68,20 +70,23 @@ const TransactionForm: React.FC = () => {
     return valid;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Submissão dos dados
-      console.log('Form data:', formData);
-      // Limpeza dos erros e campos após envio
-      setFormData({
-        type: 'receita',
-        date: '',
-        category: 'alimentacao',
-        amount: '',
-        description: '',
-      });
-      setErrors({});
+      try {
+        await addDoc(collection(db, 'transactions'), formData);
+        console.log('Transação adicionada com sucesso!');
+        setFormData({
+          type: 'receita',
+          date: '',
+          category: 'alimentacao',
+          amount: '',
+          description: '',
+        });
+        setErrors({});
+      } catch (error) {
+        console.error('Erro ao adicionar transação:', error);
+      }
     }
   };
 
