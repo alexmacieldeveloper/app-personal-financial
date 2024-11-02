@@ -9,17 +9,18 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 
 
-function App() {
+const App: React.FC = () => {
+  const isAuthenticated = true;
+
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route element={<PrivateRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+              <Route path="/*" element={<Dashboard />} />
             </Route>
           </Routes>
         </Router>
