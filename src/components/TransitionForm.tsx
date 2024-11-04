@@ -22,7 +22,7 @@ const TransactionForm: React.FC = () => {
     amount: '',
     description: '',
   });
-
+  const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState<{ [key in keyof FormData]?: string }>({});
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +75,7 @@ const TransactionForm: React.FC = () => {
     if (validateForm()) {
       try {
         await addDoc(collection(db, 'transactions'), formData);
-        console.log('Transação adicionada com sucesso!');
+        setSuccess(true)
         setFormData({
           type: 'receita',
           date: '',
@@ -83,7 +83,7 @@ const TransactionForm: React.FC = () => {
           amount: '',
           description: '',
         });
-        setErrors({});
+        setTimeout(() => setSuccess(false), 5000);
       } catch (error) {
         console.error('Erro ao adicionar transação:', error);
       }
@@ -164,6 +164,7 @@ const TransactionForm: React.FC = () => {
       <Button type="submit" variant="contained" color="primary" fullWidth style={{ marginTop: '16px' }}>
         Adicionar Transação
       </Button>
+      {success && <p style={{ color: 'green', textAlign: 'center' }}>Transação adicionada com sucesso!</p>}
     </form>
   );
 };

@@ -36,9 +36,9 @@ const Dashboard: React.FC = () => {
         >
           <Toolbar />
           <List>
+            <ListItemLink to="profile" icon={<PersonIcon />} primary="Perfil do Usuário" />
             <ListItemLink to="add-transaction" icon={<AddIcon />} primary="Adicionar Transação" />
             <ListItemLink to="list-transactions" icon={<ListIcon />} primary="Listagem de Transações" />
-            <ListItemLink to="profile" icon={<PersonIcon />} primary="Perfil do Usuário" />
             <ListItem  onClick={handleLogout}>
               <ListItemIcon><ExitToAppIcon /></ListItemIcon>
               <ListItemText primary="Sair" />
