@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ListIcon from '@mui/icons-material/List';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import TransitionForm from '../components/TransitionForm';
+import TransactionForm from '../components/TransactionForm';
 import TransactionList from '../components/TransactionList';
 import ListItemLink from '../components/ListItemLink';
 import { auth } from '../services/firebaseConfig';
@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
         <main style={{ flexGrow: 1, padding: '16px', marginLeft: drawerWidth }}>
           <Toolbar />
           <Routes>
-            <Route path="add-transaction" element={<TransitionForm />} />
+            <Route path="add-transaction" element={<TransactionForm />} />
             <Route path="list-transactions" element={<TransactionList />} />
             <Route path="profile" element={<div>Perfil do Usuário</div>} />
           </Routes>
