@@ -6,9 +6,10 @@ type ListItemLinkProps = {
   to: string;
   icon?: React.ReactNode;
   primary: string;
+  onClick?: () => void;
 } & ListItemProps;
 
-const ListItemLink: React.FC<ListItemLinkProps> = ({ to, icon, primary, ...other }) => {
+const ListItemLink: React.FC<ListItemLinkProps> = ({ to, icon, primary, onClick, ...other }) => {
   const renderLink = React.useMemo(
     () =>
       React.forwardRef<HTMLAnchorElement, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => (
@@ -18,7 +19,7 @@ const ListItemLink: React.FC<ListItemLinkProps> = ({ to, icon, primary, ...other
   );
 
   return (
-    <ListItem button component={renderLink} {...other}>
+    <ListItem button component={renderLink} onClick={onClick} {...other} style={{textDecoration: 'none', color: '#000000'}}>
       {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
       <ListItemText primary={primary} />
     </ListItem>
